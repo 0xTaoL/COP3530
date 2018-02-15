@@ -1,0 +1,44 @@
+Write a program that uses a recursive algorithm to calculate the determinant of a matrix.  The program should read a matrix, print it out, and calculate and print the determinant.   Your code will be tested with the following interface: Sparse Matrix Interface. Make sure to name your programmed class as "public class SparseMatrix" and create a constructor that creates a default matrix of size 5x5. This class SparseMatrix should implement the interface SparseInterface.
+
+The minor of a matrix element x is the sub-matrix formed by removing the row and column containing x.
+
+a=	0 4 1 3
+
+     	1 3 2 4
+
+     	2 3 1 9
+
+     	1 8 2 1
+
+and minor a(1, 2) removes row 1 and column 2
+
+minor(a(1,2)) = 	0 4 3
+
+                        2 3 9
+
+                        1 8 1
+
+ 
+
+You must implement a matrix abstract data type. 
+
+Your matrix implementation should be that of a "sparse" matrix.  Only matrix elements that are non-zero should be allocated in memory.  This means you cannot implement your matrix with a 2D array.
+
+Turn in a one-paragraph commentary with your code.  Describe your matrix implementation.  Why did you choose the implementation you did?  What is the computational complexity of the operations in your matrix implementation?
+
+Rubric:
+
+Correct 50 points
+
+Determinant is correct
+
+Matrix is sparse
+
+Style and Efficiency 30 points
+
+Code is broken into logical classes based on abstract data types
+
+Code is readable - commented, indented
+
+Commentary 20 points
+
