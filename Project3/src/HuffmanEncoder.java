@@ -16,7 +16,6 @@ public class HuffmanEncoder implements HuffmanCoding{
                 freqString.append((char) (i)).append(" ").append(freqTable[i]).append("\n");
             }
         }
-
         return freqString.toString();
     }
 
@@ -74,7 +73,7 @@ public class HuffmanEncoder implements HuffmanCoding{
         String[] table = new String[255];
         StringBuilder encode = new StringBuilder();
 
-        makeTable(table, huffTree.getRoot(), "");
+        createCodeIndex(table, huffTree.getRoot(), "");
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -84,24 +83,26 @@ public class HuffmanEncoder implements HuffmanCoding{
                 char c = (char) asciiValue;
                 encode.append(table[c]);
             }
-        } catch(FileNotFoundException e) {
-            System.out.println("FileNotFoundException: The file \""+ inputFile + "\" could not be found.");
-        } catch(IOException e) {
+        }
+        catch(FileNotFoundException e) {
+            System.err.println("File not found.");
+        }
+        catch(IOException e) {
             e.printStackTrace();
         }
         return encode.toString();
     }
 
-    private void makeTable(String[] table, HuffNode node, String code) {
+    private void createCodeIndex(String[] table, HuffNode node, String encoded) {
         if (node != null) {
             //base case
             if (node.isLeaf()) {
-                table[node.getChar()] = code;
+                table[node.getChar()] = encoded;
             }
             //recursive case
             else {
-                makeTable(table, node.getLeft(), code + "0"); //Go down left
-                makeTable(table, node.getRight(), code + "1"); //Go down right
+                createCodeIndex(table, node.getLeft(), encoded + "0"); //Go down left
+                createCodeIndex(table, node.getRight(), encoded + "1"); //Go down right
             }
         }
     }
@@ -135,7 +136,7 @@ public class HuffmanEncoder implements HuffmanCoding{
     public String traverseHuffmanTree(HuffTree huffTree) {
         String[] table = new String[255];
         StringBuilder traversed= new StringBuilder();
-        makeTable(table, huffTree.getRoot(), "");
+        createCodeIndex(table, huffTree.getRoot(), "");
 
         for (int i = 0; i < table.length; i++ ){
             if(table[i] != null) {
